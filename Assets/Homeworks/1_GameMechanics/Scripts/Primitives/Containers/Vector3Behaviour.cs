@@ -1,13 +1,13 @@
 using System;
 using UnityEngine;
 
-namespace Homeworks._1_GameMechanics.Scripts.Primitives
+namespace Homeworks._1_GameMechanics.Scripts.Primitives.Containers
 {
-    public class FloatBehaviour : MonoBehaviour
+    public sealed class Vector3Behaviour : MonoBehaviour
     {
-        public event Action<float> OnValueChanged;
+        public event Action<Vector3> OnValueChanged;
 
-        public float Value
+        public Vector3 Value
         {
             get { return this.value; }
             set
@@ -18,6 +18,6 @@ namespace Homeworks._1_GameMechanics.Scripts.Primitives
         }
 
         [SerializeField]
-        private float value;
+        private Vector3 value;
     }
 }

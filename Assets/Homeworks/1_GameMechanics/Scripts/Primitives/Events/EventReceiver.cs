@@ -2,7 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Homeworks._1_GameMechanics.Scripts.Primitives
+namespace Homeworks._1_GameMechanics.Scripts.Primitives.Events
 {
     public sealed class EventReceiver : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Homeworks._1_GameMechanics.Scripts.Primitives
+namespace Homeworks._1_GameMechanics.Scripts.Primitives.Timers
 {
     public sealed class PeriodBehaviour : MonoBehaviour
     {

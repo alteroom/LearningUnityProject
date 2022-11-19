@@ -1,13 +1,13 @@
 using System;
 using UnityEngine;
 
-namespace Homeworks._1_GameMechanics.Scripts.Primitives
+namespace Homeworks._1_GameMechanics.Scripts.Primitives.Containers
 {
-    public class TransformBehaviour : MonoBehaviour
+    public sealed class RigidbodyBehaviour : MonoBehaviour
     {
-        public event Action<Transform> OnValueChanged;
+        public event Action<Rigidbody> OnValueChanged;
 
-        public Transform Value
+        public Rigidbody Value
         {
             get { return this.value; }
             set
@@ -18,6 +18,6 @@ namespace Homeworks._1_GameMechanics.Scripts.Primitives
         }
 
         [SerializeField]
-        private Transform value;
+        private Rigidbody value;
     }
 }

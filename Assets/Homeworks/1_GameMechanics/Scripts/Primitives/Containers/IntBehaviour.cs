@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Homeworks._1_GameMechanics.Scripts.Primitives
+namespace Homeworks._1_GameMechanics.Scripts.Primitives.Containers
 {
     public sealed class IntBehaviour : MonoBehaviour
     {

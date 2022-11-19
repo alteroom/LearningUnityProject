@@ -3,7 +3,7 @@ using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Homeworks._1_GameMechanics.Scripts.Primitives
+namespace Homeworks._1_GameMechanics.Scripts.Primitives.Timers
 {
     public sealed class TimerBehaviour : MonoBehaviour
     {

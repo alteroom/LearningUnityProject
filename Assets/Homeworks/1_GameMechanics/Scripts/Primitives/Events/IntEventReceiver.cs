@@ -2,14 +2,14 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Homeworks._1_GameMechanics.Scripts.Primitives
+namespace Homeworks._1_GameMechanics.Scripts.Primitives.Events
 {
-    public class Vector3EventReceiver : MonoBehaviour
+    public sealed class IntEventReceiver : MonoBehaviour
     {
-        public event Action<Vector3> OnEvent;
+        public event Action<int> OnEvent;
 
         [Button]
-        public void Call(Vector3 value)
+        public void Call(int value)
         {
             Debug.Log($"Event {name} with {value} was received!");
             this.OnEvent?.Invoke(value);
