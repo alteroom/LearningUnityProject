@@ -1,8 +1,6 @@
-using System;
-using Homeworks._1_GameMechanics.Scripts.Primitives;
 using Homeworks._1_GameMechanics.Scripts.Primitives.Containers;
 using Homeworks._1_GameMechanics.Scripts.Primitives.Events;
-using Unity.Collections;
+using Homeworks._1_GameMechanics.Scripts.Primitives.Timers;
 using UnityEngine;
 
 namespace Homeworks._1_GameMechanics.Scripts.Mechanics
@@ -17,7 +15,12 @@ namespace Homeworks._1_GameMechanics.Scripts.Mechanics
 
         [SerializeField] 
         private RigidbodyBehaviour targetRigidbody;
+
+        [SerializeField] 
+        private MovementConstrains movementConstrains;
         
+        [SerializeField] 
+        private TimerBehaviour countdown;
         private void OnEnable()
         {
             this.jumpEventReceiver.OnEvent += OnJump;
@@ -27,21 +30,15 @@ namespace Homeworks._1_GameMechanics.Scripts.Mechanics
         {
             this.jumpEventReceiver.OnEvent -= OnJump;
         }
-
-        private Vector3 Velocity => this.targetRigidbody.Value.velocity;
-        private bool CanJump => Mathf.Abs(Velocity.y) <= Single.Epsilon;
+        private bool CanJump => movementConstrains.OnTheGround && !countdown.IsPlaying;
         private void OnJump()
         {
             if (CanJump)
             {
-                Debug.Log("Jump");
                 this.targetRigidbody.Value.AddForce(0, jumpForce.Value, 0);
+                this.countdown.ResetTime();
+                this.countdown.Play();
             }
-            else
-            {
-                Debug.Log("Can't jump on the fly");
-            }
-            
         }
     }
 }

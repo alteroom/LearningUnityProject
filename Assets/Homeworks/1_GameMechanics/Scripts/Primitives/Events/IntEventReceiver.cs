@@ -11,7 +11,6 @@ namespace Homeworks._1_GameMechanics.Scripts.Primitives.Events
         [Button]
         public void Call(int value)
         {
-            Debug.Log($"Event {name} with {value} was received!");
             this.OnEvent?.Invoke(value);
         }
     }

@@ -4,6 +4,7 @@ using Homeworks._1_GameMechanics.Scripts.Primitives.Containers;
 using Homeworks._1_GameMechanics.Scripts.Primitives.Events;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Homeworks._1_GameMechanics.Scripts.Mechanics
 {
@@ -15,6 +16,10 @@ namespace Homeworks._1_GameMechanics.Scripts.Mechanics
         [SerializeField]
         private TransformBehaviour targetTransform;
         
+        [SerializeField] 
+        private MovementConstrains constrains;
+       
+        private bool CanMove => constrains.OnTheGround;
         private void OnEnable()
         {
             this.moveEventReceiver.OnEvent += OnMove;
@@ -27,8 +32,10 @@ namespace Homeworks._1_GameMechanics.Scripts.Mechanics
 
         private void OnMove(Vector3 direction)
         {
-            Debug.Log($"Move {targetTransform.name} to vector: {direction}");
-            this.targetTransform.Value.position += direction;
+            if (CanMove)
+            {
+                this.targetTransform.Value.position += direction;
+            }
         }
     }
 }
