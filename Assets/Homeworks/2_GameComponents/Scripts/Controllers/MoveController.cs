@@ -9,23 +9,20 @@ namespace Homeworks._2_GameComponents.Scripts.Controllers
         private Entity entity;
 
         private IMoveComponent _moveComponent;
-        private IMoveSpeedComponent _moveSpeedComponent;
-
+        
         [SerializeField] 
         private InputMap inputMap;
         private void Awake()
         {
             _moveComponent = entity.Get<IMoveComponent>();
-            _moveSpeedComponent = entity.Get<IMoveSpeedComponent>();
         }
 
         private void Update()
         {
             if (HasMoveInput(out var direction))
             {
-                var speed = _moveSpeedComponent.Speed * Time.deltaTime;
-                var moveAmount = direction.normalized * speed;
-                _moveComponent.Move(moveAmount);
+                direction = direction.normalized * Time.deltaTime;
+                _moveComponent.Move(direction);
             }
             
         }

@@ -18,7 +18,10 @@ namespace Homeworks._1_GameMechanics.Scripts.Mechanics
         
         [SerializeField] 
         private MovementConstrains constrains;
-       
+
+        [SerializeField] 
+        private FloatBehaviour moveSpeed;
+
         private bool CanMove => constrains.OnTheGround;
         private void OnEnable()
         {
@@ -34,7 +37,7 @@ namespace Homeworks._1_GameMechanics.Scripts.Mechanics
         {
             if (CanMove)
             {
-                this.targetTransform.Value.position += direction;
+                this.targetTransform.Value.position += direction * this.moveSpeed.Value;
             }
         }
     }

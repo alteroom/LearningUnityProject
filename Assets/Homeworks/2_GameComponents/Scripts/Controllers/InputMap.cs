@@ -2,7 +2,8 @@ using UnityEngine;
 
 namespace Homeworks._2_GameComponents.Scripts.Controllers
 {
-    public class InputMap : MonoBehaviour
+    [CreateAssetMenu(fileName = "InputMapSettings", menuName = "ScriptableObjects/InputMap", order = 1)]
+    public class InputMap : ScriptableObject
     {
         public KeyCode ForwardKeyCode = KeyCode.W;
         public KeyCode BackKeyCode = KeyCode.S;
