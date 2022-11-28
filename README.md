@@ -1,6 +1,19 @@
 # LearningUnityProject
 Otus Unity Course Homeworks
 
+## Homework 2 FIX
+
+### Branch: 
+- *homework2_game_components*
+### Scene: 
+- *Assets/Homeworks/2_GameComponents/Scene.unity*
+### Implemented:
+- Collision Layer
+- TransformSyncMechanics
+### Refactored:
+- MoveController/MoveComponent/MoveMechanics
+- InputMap as ScriptableObject
+
 ## Homework 2
 
 ### Branch: 
