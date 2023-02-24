@@ -11,12 +11,6 @@ namespace Homeworks._1_GameMechanics.Scripts.Mechanics
         
         private Vector3 Velocity => this.targetRigidbody.Value.velocity;
         
-        public bool OnTheGround
-        {
-            get
-            {
-                return Mathf.Abs(Velocity.y) <= 0.01f;
-            }
-        }
+        public bool OnTheGround => Mathf.Abs(Velocity.y) <= 0.01f;
     }
 }

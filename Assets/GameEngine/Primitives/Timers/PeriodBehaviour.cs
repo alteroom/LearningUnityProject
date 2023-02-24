@@ -8,10 +8,7 @@ namespace Homeworks._1_GameMechanics.Scripts.Primitives.Timers
     {
         public event Action OnEvent;
         
-        public bool IsPlaying
-        {
-            get { return this.coroutine != null; }
-        }
+        public bool IsPlaying => this.coroutine != null;
 
         private Coroutine coroutine;
 

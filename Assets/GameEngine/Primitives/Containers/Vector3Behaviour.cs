@@ -9,7 +9,7 @@ namespace Homeworks._1_GameMechanics.Scripts.Primitives.Containers
 
         public Vector3 Value
         {
-            get { return this.value; }
+            get => this.value;
             set
             {
                 this.value = value;

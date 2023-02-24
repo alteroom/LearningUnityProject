@@ -20,7 +20,16 @@ namespace Modules.GameSystem
         /// </summary>
         void DetachGame(IGameContext context);
     }
-
+    public interface IGameConstructElement : IGameElement
+    {
+        /// <summary>
+        ///     <para>Called when need to resolve dependencies.</para>
+        ///     <para>Do not use this interface for advanced architecture</para>
+        ///     <seealso cref="GameInjector"/>
+        ///     <seealso cref="GameInjectAttribute"/>
+        /// </summary>
+        void ConstructGame(IGameContext context);
+    }
     public interface IGameInitElement : IGameElement
     {
         /// <summary>

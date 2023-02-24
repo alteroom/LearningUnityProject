@@ -5,93 +5,126 @@ namespace Modules.GameSystem
 {
     public class GameContext : IGameContext
     {
-        public event Action OnGameInitialized;
-        public event Action OnGameReady;
-        public event Action OnGameStarted;
-        public event Action OnGamePaused;
-        public event Action OnGameResumed;
-        public event Action OnGameFinished;
-        public GameState State { get; private set; }
+        
+        public GameStates State => m_GameState.State;
 
+        private readonly GameState m_GameState = new ();
+        private readonly ElementsContext m_ElementsContext;
+        private readonly ServicesContext m_ServicesContext = new ();
         public GameContext()
         {
-            this.State = GameState.None;
+            m_ElementsContext = new (this);
+        }
+
+        public void ConstructGame()
+        {
+            if (!m_GameState.CanTransit(GameElements.Construct))
+            {
+                return;
+            }
+            m_ElementsContext.ConstructGame();
+            m_GameState.ConstructGame();
             
         }
-        
+
         public void InitGame()
         {
-            if (this.State == GameState.None)
+            if (!m_GameState.CanTransit(GameElements.Init))
             {
-                this.State = GameState.Init;
-                Debug.Log("InitGame");
-                OnGameInitialized?.Invoke();
+                return;
             }
+            m_ElementsContext.InitGame();
+            m_GameState.InitGame();
         }
 
         public void ReadyGame()
         {
-            if (this.State == GameState.Init)
+            if (!m_GameState.CanTransit(GameElements.Ready))
             {
-                this.State = GameState.Ready;
-                Debug.Log("Ready");
-                OnGameReady?.Invoke();
+                return;
             }
+            m_ElementsContext.ReadyGame();
+            m_GameState.ReadyGame();
         }
 
         public void StartGame()
         {
-            if (this.State == GameState.Ready)
+            if (!m_GameState.CanTransit(GameElements.Start))
             {
-                this.State = GameState.Play;
-                Debug.Log("Play");
-                OnGameStarted?.Invoke();
+                return;
             }
+            m_ElementsContext.StartGame();
+            m_GameState.StartGame();
         }
 
         public void PauseGame()
         {
-            if (this.State == GameState.Play)
+            if (!m_GameState.CanTransit(GameElements.Pause))
             {
-                this.State = GameState.Pause;
-                Debug.Log("Pause");
-                OnGamePaused?.Invoke();
+                return;
             }
+            m_ElementsContext.PauseGame();
+            m_GameState.PauseGame();
         }
 
         public void ResumeGame()
         {
-            if (this.State == GameState.Pause)
+            if (!m_GameState.CanTransit(GameElements.Resume))
             {
-                this.State = GameState.Play;
-                Debug.Log("Play");
-                OnGameResumed?.Invoke();
+                return;
             }
+            m_ElementsContext.ResumeGame();
+            m_GameState.ResumeGame();
         }
 
         public void FinishGame()
         {
-            if (this.State == GameState.Play || this.State == GameState.Pause)
+            if (!m_GameState.CanTransit(GameElements.Finish))
             {
-                this.State = GameState.Finish;
-                Debug.Log("Finish");
-                OnGameFinished?.Invoke();
+                return;
             }
+            m_ElementsContext.FinishGame();
+            m_GameState.FinishGame();
         }
 
         public void RegisterElement(IGameElement element)
         {
-            throw new NotImplementedException();
+            m_ElementsContext.RegisterElement(element);
         }
 
         public void UnregisterElement(IGameElement element)
         {
-            throw new NotImplementedException();
+            m_ElementsContext.UnregisterElement(element);
         }
 
-        public object[] GetAllElements()
+        public IGameElement[] GetAllElements()
         {
-            throw new NotImplementedException();
+            return m_ElementsContext.GetAllElements();
+        }
+
+        public void RegisterService(object service)
+        {
+            m_ServicesContext.RegisterService(service);
+        }
+
+        public void UnregisterService(object service)
+        {
+            m_ServicesContext.UnregisterService(service);
+        }
+
+        public T GetService<T>()
+        {
+            return m_ServicesContext.GetService<T>();
+        }
+
+        public bool TryGetService<T>(out T service)
+        {
+            return m_ServicesContext.TryGetService(out service);
+        }
+
+        public T[] GetServices<T>()
+        {
+            return m_ServicesContext.GetServices<T>();
         }
     }
 }

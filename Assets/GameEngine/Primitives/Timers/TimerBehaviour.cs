@@ -9,10 +9,7 @@ namespace Homeworks._1_GameMechanics.Scripts.Primitives.Timers
     {
         public event Action OnEnded;
 
-        public bool IsPlaying
-        {
-            get { return this.timerCoroutine != null; }
-        }
+        public bool IsPlaying => this.timerCoroutine != null;
 
         [SerializeField]
         private float duration = 3;
