@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Homeworks._2_GameComponents.Scripts.Components
+namespace GameEngine.Components
 {
     public interface IMoveComponent
     {

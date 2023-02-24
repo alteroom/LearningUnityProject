@@ -1,12 +1,8 @@
-using System;
-using Homeworks._1_GameMechanics.Scripts.Primitives;
-using Homeworks._1_GameMechanics.Scripts.Primitives.Containers;
-using Homeworks._1_GameMechanics.Scripts.Primitives.Events;
-using Sirenix.OdinInspector;
+using GameEngine.Primitives.Containers;
+using GameEngine.Primitives.Events;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Homeworks._1_GameMechanics.Scripts.Mechanics
+namespace GameEngine.Mechanics
 {
     public sealed class MoveMechanics : MonoBehaviour
     {

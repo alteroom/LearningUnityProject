@@ -1,8 +1,7 @@
-using System;
-using Homeworks._1_GameMechanics.Scripts.Primitives.Containers;
+using GameEngine.Primitives.Containers;
 using UnityEngine;
 
-namespace Homeworks._1_GameMechanics.Scripts.Mechanics
+namespace GameEngine.Mechanics
 {
     public class MovementConstrains : MonoBehaviour
     {

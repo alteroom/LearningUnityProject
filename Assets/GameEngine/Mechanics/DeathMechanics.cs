@@ -1,10 +1,8 @@
-
-using Homeworks._1_GameMechanics.Scripts.Primitives;
-using Homeworks._1_GameMechanics.Scripts.Primitives.Containers;
-using Homeworks._1_GameMechanics.Scripts.Primitives.Events;
+using GameEngine.Primitives.Containers;
+using GameEngine.Primitives.Events;
 using UnityEngine;
 
-namespace Homeworks._1_GameMechanics.Scripts.Mechanics
+namespace GameEngine.Mechanics
 {
     public sealed class DeathMechanics : MonoBehaviour
     {

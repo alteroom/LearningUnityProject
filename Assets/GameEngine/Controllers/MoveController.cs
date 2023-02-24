@@ -1,20 +1,26 @@
-using Homeworks._2_GameComponents.Scripts.Components;
+using GameEngine.Components;
+using GameEngine.Entities;
+using GameEngine.Services;
+using Modules.GameSystem.Context;
+using Modules.GameSystem.GameElements;
 using UnityEngine;
 
-namespace Homeworks._2_GameComponents.Scripts.Controllers
+namespace GameEngine.Controllers
 {
-    public sealed class MoveController : MonoBehaviour
+    public sealed class MoveController : MonoBehaviour,
+        IGameConstructElement, 
+        IGameStartElement, 
+        IGamePauseElement, 
+        IGameResumeElement, 
+        IGameFinishElement
     {
-        [SerializeField] 
-        private Entity entity;
-
-        private IMoveComponent _moveComponent;
+        private IMoveComponent m_MoveComponent;
         
         [SerializeField] 
         private InputMap inputMap;
         private void Awake()
         {
-            _moveComponent = entity.Get<IMoveComponent>();
+            enabled = false;
         }
 
         private void Update()
@@ -22,7 +28,7 @@ namespace Homeworks._2_GameComponents.Scripts.Controllers
             if (HasMoveInput(out var direction))
             {
                 direction = direction.normalized * Time.deltaTime;
-                _moveComponent.Move(direction);
+                m_MoveComponent.Move(direction);
             }
             
         }
@@ -53,6 +59,31 @@ namespace Homeworks._2_GameComponents.Scripts.Controllers
             return false;
         }
 
-       
+
+        void IGameConstructElement.ConstructGame(IGameContext context)
+        {
+            var entity = context.GetService<HeroService>().GetCharacter();
+            m_MoveComponent = entity.Get<IMoveComponent>();
+        }
+
+        void IGameStartElement.StartGame()
+        {
+            enabled = true;
+        }
+
+        void IGamePauseElement.PauseGame()
+        {
+            enabled = false;
+        }
+
+        void IGameResumeElement.ResumeGame()
+        {
+            enabled = true;
+        }
+
+        void IGameFinishElement.FinishGame()
+        {
+            enabled = false;
+        }
     }
 }

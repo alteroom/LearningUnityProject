@@ -1,7 +1,7 @@
-using Homeworks._1_GameMechanics.Scripts.Primitives.Events;
+using GameEngine.Primitives.Events;
 using UnityEngine;
 
-namespace Homeworks._2_GameComponents.Scripts.Components
+namespace GameEngine.Components
 {
     public sealed class JumpComponent : MonoBehaviour, IJumpComponent
     {

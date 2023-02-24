@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Homeworks._2_GameComponents.Scripts
+namespace GameEngine.Entities
 {
-    public sealed class Entity : MonoBehaviour
+    public sealed class Entity : MonoBehaviour, IEntity
     {
         [SerializeField] 
         private List<MonoBehaviour> components;

@@ -1,7 +1,8 @@
-using System;
 using System.Collections.Generic;
+using Modules.GameSystem.GameElements;
+using Modules.GameSystem.GameState;
 
-namespace Modules.GameSystem
+namespace Modules.GameSystem.Context
 {
     internal class ElementsContext : IGameElementsContext, IGameStateMethods
     {

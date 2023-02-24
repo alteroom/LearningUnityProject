@@ -1,14 +1,14 @@
-using System;
-using UnityEngine;
+using Modules.GameSystem.GameElements;
+using Modules.GameSystem.GameState;
 
-namespace Modules.GameSystem
+namespace Modules.GameSystem.Context
 {
     public class GameContext : IGameContext
     {
         
         public GameStates State => m_GameState.State;
 
-        private readonly GameState m_GameState = new ();
+        private readonly GameState.GameState m_GameState = new ();
         private readonly ElementsContext m_ElementsContext;
         private readonly ServicesContext m_ServicesContext = new ();
         public GameContext()
@@ -18,7 +18,7 @@ namespace Modules.GameSystem
 
         public void ConstructGame()
         {
-            if (!m_GameState.CanTransit(GameElements.Construct))
+            if (!m_GameState.CanTransit(GameElements.GameElements.Construct))
             {
                 return;
             }
@@ -29,7 +29,7 @@ namespace Modules.GameSystem
 
         public void InitGame()
         {
-            if (!m_GameState.CanTransit(GameElements.Init))
+            if (!m_GameState.CanTransit(GameElements.GameElements.Init))
             {
                 return;
             }
@@ -39,7 +39,7 @@ namespace Modules.GameSystem
 
         public void ReadyGame()
         {
-            if (!m_GameState.CanTransit(GameElements.Ready))
+            if (!m_GameState.CanTransit(GameElements.GameElements.Ready))
             {
                 return;
             }
@@ -49,7 +49,7 @@ namespace Modules.GameSystem
 
         public void StartGame()
         {
-            if (!m_GameState.CanTransit(GameElements.Start))
+            if (!m_GameState.CanTransit(GameElements.GameElements.Start))
             {
                 return;
             }
@@ -59,7 +59,7 @@ namespace Modules.GameSystem
 
         public void PauseGame()
         {
-            if (!m_GameState.CanTransit(GameElements.Pause))
+            if (!m_GameState.CanTransit(GameElements.GameElements.Pause))
             {
                 return;
             }
@@ -69,7 +69,7 @@ namespace Modules.GameSystem
 
         public void ResumeGame()
         {
-            if (!m_GameState.CanTransit(GameElements.Resume))
+            if (!m_GameState.CanTransit(GameElements.GameElements.Resume))
             {
                 return;
             }
@@ -79,7 +79,7 @@ namespace Modules.GameSystem
 
         public void FinishGame()
         {
-            if (!m_GameState.CanTransit(GameElements.Finish))
+            if (!m_GameState.CanTransit(GameElements.GameElements.Finish))
             {
                 return;
             }

@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
+using Modules.GameSystem.Context;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Modules.GameSystem
+namespace Modules.GameSystem.Installers
 {
     public class MonoGameContextInstaller : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Modules.GameSystem
+namespace Modules.GameSystem.GameState
 {
     public class GameState
     {
@@ -14,32 +14,32 @@ namespace Modules.GameSystem
         public event Action OnGameResumed;
         public event Action OnGameFinished;
 
-        private readonly Dictionary<GameElements, Predicate<GameStates>> m_TransitPredicates;
+        private readonly Dictionary<GameElements.GameElements, Predicate<GameStates>> m_TransitPredicates;
         public GameStates State { get; private set; }
 
         public GameState()
         {
             State = GameStates.None;
-            m_TransitPredicates = new Dictionary<GameElements,  Predicate<GameStates>>
+            m_TransitPredicates = new Dictionary<GameElements.GameElements,  Predicate<GameStates>>
             {
-                {GameElements.Construct, state => state == GameStates.None},
-                {GameElements.Init, state => state == GameStates.Construct},
-                {GameElements.Ready, state => state == GameStates.Init},
-                {GameElements.Start, state => state == GameStates.Ready},
-                {GameElements.Pause, state => state == GameStates.Play},
-                {GameElements.Resume, state => state == GameStates.Pause},
-                {GameElements.Finish, state => state == GameStates.Play || state == GameStates.Pause},
+                {GameElements.GameElements.Construct, state => state == GameStates.None},
+                {GameElements.GameElements.Init, state => state == GameStates.Construct},
+                {GameElements.GameElements.Ready, state => state == GameStates.Init},
+                {GameElements.GameElements.Start, state => state == GameStates.Ready},
+                {GameElements.GameElements.Pause, state => state == GameStates.Play},
+                {GameElements.GameElements.Resume, state => state == GameStates.Pause},
+                {GameElements.GameElements.Finish, state => state == GameStates.Play || state == GameStates.Pause},
             };
         }
 
-        public bool CanTransit(GameElements element)
+        public bool CanTransit(GameElements.GameElements element)
         {
             var condition = m_TransitPredicates[element];
             return condition(State);
         }
         public void ConstructGame()
         {
-            if (CanTransit(GameElements.Construct))
+            if (CanTransit(GameElements.GameElements.Construct))
             {
                 this.State = GameStates.Construct;
                 Debug.Log("ConstructGame");
@@ -49,7 +49,7 @@ namespace Modules.GameSystem
 
         public void InitGame()
         {
-            if (CanTransit(GameElements.Init))
+            if (CanTransit(GameElements.GameElements.Init))
             {
                 this.State = GameStates.Init;
                 Debug.Log("InitGame");
@@ -59,7 +59,7 @@ namespace Modules.GameSystem
 
         public void ReadyGame()
         {
-            if (CanTransit(GameElements.Ready))
+            if (CanTransit(GameElements.GameElements.Ready))
             {
                 this.State = GameStates.Ready;
                 Debug.Log("Ready");
@@ -69,7 +69,7 @@ namespace Modules.GameSystem
 
         public void StartGame()
         {
-            if (CanTransit(GameElements.Start))
+            if (CanTransit(GameElements.GameElements.Start))
             {
                 this.State = GameStates.Play;
                 Debug.Log("Play");
@@ -79,7 +79,7 @@ namespace Modules.GameSystem
 
         public void PauseGame()
         {
-            if (CanTransit(GameElements.Pause))
+            if (CanTransit(GameElements.GameElements.Pause))
             {
                 this.State = GameStates.Pause;
                 Debug.Log("Pause");
@@ -89,7 +89,7 @@ namespace Modules.GameSystem
 
         public void ResumeGame()
         {
-            if (CanTransit(GameElements.Resume))
+            if (CanTransit(GameElements.GameElements.Resume))
             {
                 this.State = GameStates.Play;
                 Debug.Log("Play");
@@ -99,7 +99,7 @@ namespace Modules.GameSystem
 
         public void FinishGame()
         {
-            if (CanTransit(GameElements.Finish))
+            if (CanTransit(GameElements.GameElements.Finish))
             {
                 this.State = GameStates.Finish;
                 Debug.Log("Finish");

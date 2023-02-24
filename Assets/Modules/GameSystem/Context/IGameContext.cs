@@ -1,7 +1,6 @@
+using Modules.GameSystem.GameState;
 
-using System;
-
-namespace Modules.GameSystem
+namespace Modules.GameSystem.Context
 {
     public interface IGameContext : IGameElementsContext, IServicesContext, IGameStateMethods
     {

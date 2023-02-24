@@ -1,22 +1,29 @@
-using Homeworks._2_GameComponents.Scripts.Components;
+using GameEngine.Components;
+using GameEngine.Entities;
+using GameEngine.Services;
+using Modules.GameSystem.Context;
+using Modules.GameSystem.GameElements;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Homeworks._2_GameComponents.Scripts.Controllers
+namespace GameEngine.Controllers
 {
-    public sealed class ShootController : MonoBehaviour
+    public sealed class ShootController : MonoBehaviour,
+        
+    IGameConstructElement, 
+    IGameStartElement, 
+    IGamePauseElement, 
+    IGameResumeElement, 
+    IGameFinishElement
     {
-        [SerializeField] 
-        private Entity entity;
-
+        
         [SerializeField] 
         private InputMap inputMap;
-        private IShootComponent _shootComponent;
+        private IShootComponent m_ShootComponent;
 
         
         private void Awake()
         {
-            _shootComponent = entity.Get<IShootComponent>();
+            enabled = false;
         }
 
         private void Update()
@@ -24,7 +31,7 @@ namespace Homeworks._2_GameComponents.Scripts.Controllers
             if (Input.GetMouseButtonDown(inputMap.ShootMouseButton))
             {
                 var direction = GetShootDirection();
-                _shootComponent.Shoot(direction);
+                m_ShootComponent.Shoot(direction);
             }
         }
 
@@ -37,6 +44,32 @@ namespace Homeworks._2_GameComponents.Scripts.Controllers
             if (Input.GetKey(inputMap.BackKeyCode))
                 return Vector3.back;
             return Vector3.forward;
+        }
+
+        void IGameConstructElement.ConstructGame(IGameContext context)
+        {
+            var entity = context.GetService<HeroService>().GetCharacter();
+            m_ShootComponent = entity.Get<IShootComponent>();
+        }
+
+        void IGameStartElement.StartGame()
+        {
+            enabled = true;
+        }
+
+        void IGamePauseElement.PauseGame()
+        {
+            enabled = false;
+        }
+
+        void IGameResumeElement.ResumeGame()
+        {
+            enabled = true;
+        }
+
+        void IGameFinishElement.FinishGame()
+        {
+            enabled = false;
         }
     }
 }

@@ -1,6 +1,4 @@
-using System;
-
-namespace Modules.GameSystem
+namespace Modules.GameSystem.GameState
 {
     public interface IGameStateMethods
     {

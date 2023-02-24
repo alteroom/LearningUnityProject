@@ -1,4 +1,4 @@
-namespace Modules.GameSystem
+namespace Modules.GameSystem.GameElements
 {
     public enum GameElements
     {

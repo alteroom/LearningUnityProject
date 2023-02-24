@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using Modules.GameSystem.Context;
+using Modules.GameSystem.GameElements;
 using UnityEngine;
 
-namespace Modules.GameSystem
+namespace Modules.GameSystem.Installers
 {
     public class GameContextInstaller
     {

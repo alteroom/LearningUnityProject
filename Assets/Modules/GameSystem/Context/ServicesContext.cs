@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
 
-namespace Modules.GameSystem
+namespace Modules.GameSystem.Context
 {
     internal class ServicesContext : IServicesContext
     {

@@ -1,4 +1,6 @@
-namespace Modules.GameSystem
+using Modules.GameSystem.Context;
+
+namespace Modules.GameSystem.GameElements
 {
     public interface IGameElement
     {

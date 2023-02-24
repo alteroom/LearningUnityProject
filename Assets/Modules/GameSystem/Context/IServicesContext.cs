@@ -1,4 +1,4 @@
-namespace Modules.GameSystem
+namespace Modules.GameSystem.Context
 {
     public interface IServicesContext
     {
