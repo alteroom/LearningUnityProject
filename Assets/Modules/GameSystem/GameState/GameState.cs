@@ -62,7 +62,7 @@ namespace Modules.GameSystem.GameState
             if (CanTransit(GameElements.GameElements.Ready))
             {
                 this.State = GameStates.Ready;
-                Debug.Log("Ready");
+                Debug.Log("ReadyGame");
                 OnGameReady?.Invoke();
             }
         }
@@ -72,7 +72,7 @@ namespace Modules.GameSystem.GameState
             if (CanTransit(GameElements.GameElements.Start))
             {
                 this.State = GameStates.Play;
-                Debug.Log("Play");
+                Debug.Log("StartGame");
                 OnGameStarted?.Invoke();
             }
         }
@@ -92,7 +92,7 @@ namespace Modules.GameSystem.GameState
             if (CanTransit(GameElements.GameElements.Resume))
             {
                 this.State = GameStates.Play;
-                Debug.Log("Play");
+                Debug.Log("ResumeGame");
                 OnGameResumed?.Invoke();
             }
         }
@@ -102,7 +102,7 @@ namespace Modules.GameSystem.GameState
             if (CanTransit(GameElements.GameElements.Finish))
             {
                 this.State = GameStates.Finish;
-                Debug.Log("Finish");
+                Debug.Log("FinishGame");
                 OnGameFinished?.Invoke();
             }
         }

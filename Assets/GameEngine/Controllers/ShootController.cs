@@ -1,5 +1,4 @@
 using GameEngine.Components;
-using GameEngine.Entities;
 using GameEngine.Services;
 using Modules.GameSystem.Context;
 using Modules.GameSystem.GameElements;
@@ -8,7 +7,6 @@ using UnityEngine;
 namespace GameEngine.Controllers
 {
     public sealed class ShootController : MonoBehaviour,
-        
     IGameConstructElement, 
     IGameStartElement, 
     IGamePauseElement, 
@@ -19,7 +17,6 @@ namespace GameEngine.Controllers
         [SerializeField] 
         private InputMap inputMap;
         private IShootComponent m_ShootComponent;
-
         
         private void Awake()
         {
