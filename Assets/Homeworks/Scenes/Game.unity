@@ -1268,7 +1268,7 @@ GameObject:
   - component: {fileID: 704688062}
   - component: {fileID: 704688063}
   m_Layer: 0
-  m_Name: DeathComponet
+  m_Name: DeathComponent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3540,6 +3540,7 @@ GameObject:
   - component: {fileID: 1866268387}
   - component: {fileID: 1866268389}
   - component: {fileID: 1866268388}
+  - component: {fileID: 1866268390}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -3591,6 +3592,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1866268390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866268386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d228d191ab438496201938734f6a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Entity: {fileID: 1746336104}
 --- !u!1 &1912743891
 GameObject:
   m_ObjectHideFlags: 0
