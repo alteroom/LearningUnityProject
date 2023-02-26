@@ -11,7 +11,7 @@ namespace GameEngine.Primitives.Events
         [Button]
         public void Call(Vector3 value)
         {
-            this.OnEvent?.Invoke(value);
+            OnEvent?.Invoke(value);
         }
         
         [Button]

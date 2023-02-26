@@ -1,3 +1,4 @@
+using System;
 using Modules.GameSystem.GameElements;
 using Modules.GameSystem.GameState;
 
@@ -5,12 +6,53 @@ namespace Modules.GameSystem.Context
 {
     public class GameContext : IGameContext
     {
-        
+        public event Action OnGameConstructed
+        {
+            add => m_GameState.OnGameConstructed += value;
+            remove => m_GameState.OnGameConstructed -= value;
+        }
+
+        public event Action OnGameInitialized
+        {
+            add => m_GameState.OnGameInitialized += value;
+            remove => m_GameState.OnGameInitialized -= value;
+        }
+
+        public event Action OnGameReady
+        {
+            add => m_GameState.OnGameReady += value;
+            remove => m_GameState.OnGameReady -= value;
+        }
+
+        public event Action OnGameStarted
+        {
+            add => m_GameState.OnGameStarted += value;
+            remove => m_GameState.OnGameStarted -= value;
+        }
+
+        public event Action OnGamePaused
+        {
+            add => m_GameState.OnGamePaused += value;
+            remove => m_GameState.OnGamePaused -= value;
+        }
+
+        public event Action OnGameResumed
+        {
+            add => m_GameState.OnGameResumed += value;
+            remove => m_GameState.OnGameResumed -= value;
+        }
+
+        public event Action OnGameFinished
+        {
+            add => m_GameState.OnGameFinished += value;
+            remove => m_GameState.OnGameFinished -= value;
+        }   
         public GameStates State => m_GameState.State;
 
         private readonly GameState.GameState m_GameState = new ();
         private readonly ElementsContext m_ElementsContext;
         private readonly ServicesContext m_ServicesContext = new ();
+        
         public GameContext()
         {
             m_ElementsContext = new (this);

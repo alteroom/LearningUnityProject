@@ -3,44 +3,40 @@ using GameEngine.Services;
 using Modules.GameSystem.Context;
 using Modules.GameSystem.GameElements;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace GameEngine.Controllers
 {
-    public sealed class JumpController : MonoBehaviour, 
+    public class FinishGameController : MonoBehaviour, 
         IGameConstructElement, 
         IGameStartElement, 
         IGamePauseElement, 
         IGameResumeElement, 
         IGameFinishElement
     {
-        [SerializeField] 
-        private InputMap m_InputMap;
-        
-        private IJumpComponent m_JumpComponent;
-        
+        private IDeathComponent m_DeathComponent;
+        private IGameContext m_Context;
         private void Awake()
         {
             enabled = false;
         }
 
-        private void Update()
-        {
-            if (Input.GetKey(m_InputMap.JumpKeyCode))
-            {
-                m_JumpComponent.Jump();
-            }
-        }
-
         void IGameConstructElement.ConstructGame(IGameContext context)
         {
+            m_Context = context;
             var entity = context.GetService<HeroService>().GetCharacter();
-            m_JumpComponent = entity.Get<IJumpComponent>();
+            m_DeathComponent = entity.Get<IDeathComponent>();
+        }
+
+        private void OnDeath(object reason)
+        {
+            m_Context.FinishGame();
         }
 
         void IGameStartElement.StartGame()
         {
+            m_DeathComponent.OnDeath += OnDeath;
             enabled = true;
+            
         }
 
         void IGamePauseElement.PauseGame()
@@ -55,6 +51,7 @@ namespace GameEngine.Controllers
 
         void IGameFinishElement.FinishGame()
         {
+            m_DeathComponent.OnDeath -= OnDeath;
             enabled = false;
         }
     }

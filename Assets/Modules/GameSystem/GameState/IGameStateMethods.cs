@@ -1,3 +1,5 @@
+using System;
+
 namespace Modules.GameSystem.GameState
 {
     public interface IGameStateMethods

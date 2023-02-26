@@ -11,7 +11,7 @@ namespace GameEngine.Primitives.Events
         [Button]
         public void Call()
         {
-            this.OnEvent?.Invoke();
+            OnEvent?.Invoke();
         }
     }
 }

@@ -3,6 +3,7 @@ using GameEngine.Services;
 using Modules.GameSystem.Context;
 using Modules.GameSystem.GameElements;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GameEngine.Controllers
 {
@@ -16,7 +17,7 @@ namespace GameEngine.Controllers
         private IMoveComponent m_MoveComponent;
         
         [SerializeField] 
-        private InputMap inputMap;
+        private InputMap m_InputMap;
         private void Awake()
         {
             enabled = false;
@@ -34,22 +35,22 @@ namespace GameEngine.Controllers
 
         private bool HasMoveInput(out Vector3 direction)
         {
-            if (Input.GetKey(inputMap.LeftKeyCode))
+            if (Input.GetKey(m_InputMap.LeftKeyCode))
             {
                 direction = Vector3.left;
                 return true;
             }
-            if (Input.GetKey(inputMap.RightKeyCode))
+            if (Input.GetKey(m_InputMap.RightKeyCode))
             {
                 direction = Vector3.right;
                 return true;
             }
-            if (Input.GetKey(inputMap.ForwardKeyCode))
+            if (Input.GetKey(m_InputMap.ForwardKeyCode))
             {
                 direction = Vector3.forward;
                 return true;
             }
-            if (Input.GetKey(inputMap.BackKeyCode))
+            if (Input.GetKey(m_InputMap.BackKeyCode))
             {
                 direction = Vector3.back;
                 return true;

@@ -3,6 +3,7 @@ using GameEngine.Services;
 using Modules.GameSystem.Context;
 using Modules.GameSystem.GameElements;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GameEngine.Controllers
 {
@@ -15,7 +16,7 @@ namespace GameEngine.Controllers
     {
         
         [SerializeField] 
-        private InputMap inputMap;
+        private InputMap m_InputMap;
         private IShootComponent m_ShootComponent;
         
         private void Awake()
@@ -25,7 +26,7 @@ namespace GameEngine.Controllers
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(inputMap.ShootMouseButton))
+            if (Input.GetMouseButtonDown(m_InputMap.ShootMouseButton))
             {
                 var direction = GetShootDirection();
                 m_ShootComponent.Shoot(direction);
@@ -34,11 +35,11 @@ namespace GameEngine.Controllers
 
         private Vector3 GetShootDirection()
         {
-            if (Input.GetKey(inputMap.LeftKeyCode))
+            if (Input.GetKey(m_InputMap.LeftKeyCode))
                 return Vector3.left;
-            if (Input.GetKey(inputMap.RightKeyCode))
+            if (Input.GetKey(m_InputMap.RightKeyCode))
                 return Vector3.right;
-            if (Input.GetKey(inputMap.BackKeyCode))
+            if (Input.GetKey(m_InputMap.BackKeyCode))
                 return Vector3.back;
             return Vector3.forward;
         }

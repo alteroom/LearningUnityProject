@@ -1,32 +1,33 @@
 using GameEngine.Primitives.Containers;
 using GameEngine.Primitives.Events;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GameEngine.Mechanics
 {
     public sealed class DeathMechanics : MonoBehaviour
     {
         [SerializeField]
-        private IntBehaviour hitPoints;
+        private IntBehaviour m_HitPoints;
 
         [SerializeField]
-        private EventReceiver deathReceiver;
+        private ObjectEventReceiver m_DeathReceiver;
 
         private void OnEnable()
         {
-            this.hitPoints.OnValueChanged += this.OnHitPointsChanged;
+            m_HitPoints.OnValueChanged += this.OnHitPointsChanged;
         }
 
         private void OnDisable()
         {
-            this.hitPoints.OnValueChanged -= this.OnHitPointsChanged;
+            m_HitPoints.OnValueChanged -= this.OnHitPointsChanged;
         }
 
         private void OnHitPointsChanged(int newHitPoints)
         {
             if (newHitPoints <= 0)
             {
-                this.deathReceiver.Call();
+                m_DeathReceiver.Call("NoHitPoints");
             }
         }
     }

@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace GameEngine.Primitives.Events
 {
-    public sealed class IntEventReceiver : MonoBehaviour
+    public class ObjectEventReceiver : MonoBehaviour
     {
-        public event Action<int> OnEvent;
+        public event Action<object> OnEvent;
 
         [Button]
-        public void Call(int value)
+        public void Call(object value)
         {
             OnEvent?.Invoke(value);
         }
