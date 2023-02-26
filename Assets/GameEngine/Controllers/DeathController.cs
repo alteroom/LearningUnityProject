@@ -33,7 +33,6 @@ namespace GameEngine.Controllers
 
         private void OnAbyssTrigger(Collider other, object reason)
         {
-            Debug.Log("OnAbyssTrigger");
             if (!other.TryGetComponent(out IEntity entity))
             {
                 Debug.LogError("No Entity Component");
@@ -45,7 +44,6 @@ namespace GameEngine.Controllers
                 Debug.LogError("No Death Component");
                 return;
             }
-            Debug.Log($"Death {reason}");
             deathComponent.Death(reason);
         }
 
