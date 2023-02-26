@@ -1,6 +1,6 @@
 using GameEngine.Entities;
 
-namespace GameEngine.Services
+namespace Modules.Services
 {
     public interface ICharacterService
     {

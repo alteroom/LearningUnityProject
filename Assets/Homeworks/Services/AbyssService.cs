@@ -1,7 +1,7 @@
 using GameEngine.Primitives.Collision;
 using UnityEngine;
 
-namespace GameEngine.Services
+namespace Homeworks.Services
 {
     public class AbyssService : MonoBehaviour
     {

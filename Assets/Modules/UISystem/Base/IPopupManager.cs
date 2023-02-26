@@ -12,10 +12,8 @@ namespace Modules.UISystem.Base
 
         void HidePopup(TKey key);
 
-        bool IsPopupInStack(TKey key);
+        bool IsPopupActive(TKey key);
         
-        bool IsPopupOnTop(TKey key);
-
         void HideAllPopups();
 
     }

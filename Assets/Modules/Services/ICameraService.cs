@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GameEngine.Services
+namespace Modules.Services
 {
     public interface ICameraService
     {

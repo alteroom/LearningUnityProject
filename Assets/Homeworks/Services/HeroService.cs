@@ -1,8 +1,8 @@
 using GameEngine.Entities;
+using Modules.Services;
 using UnityEngine;
 
-
-namespace GameEngine.Services
+namespace Homeworks.Services
 {
     public class HeroService : MonoBehaviour, ICharacterService
     {
