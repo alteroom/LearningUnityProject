@@ -1,6 +1,23 @@
 # LearningUnityProject
 Otus Unity Course Homeworks
 
+## Homework 3
+
+### Branch: 
+- *HW3_GameContext*
+### Scene: 
+- *Assets/Homeworks/Game.unity*
+### Implemented:
+- Game Context
+- Game Elements
+- Game Loader
+- Hero Service
+- Camera Service
+- Death Controller
+- Finish Game Controller
+### Refactored:
+- Changed code style
+
 ## Homework 2 FIX
 
 ### Branch: 
