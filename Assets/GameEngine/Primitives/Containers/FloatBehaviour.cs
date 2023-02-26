@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Homeworks._1_GameMechanics.Scripts.Primitives.Containers
+namespace GameEngine.Primitives.Containers
 {
     public sealed class FloatBehaviour : MonoBehaviour
     {
@@ -9,7 +9,7 @@ namespace Homeworks._1_GameMechanics.Scripts.Primitives.Containers
 
         public float Value
         {
-            get { return this.value; }
+            get => this.value;
             set
             {
                 this.value = value;

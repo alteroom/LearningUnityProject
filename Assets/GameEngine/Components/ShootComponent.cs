@@ -1,16 +1,17 @@
-using Homeworks._1_GameMechanics.Scripts.Primitives.Events;
+using GameEngine.Primitives.Events;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace Homeworks._2_GameComponents.Scripts.Components
+namespace GameEngine.Components
 {
     public sealed class ShootComponent : MonoBehaviour, IShootComponent
     {
         [SerializeField]
-        private Vector3EventReceiver shootInDirectionReceiver;
+        private Vector3EventReceiver m_ShootInDirectionReceiver;
         
         public void Shoot(Vector3 direction)
         {
-            shootInDirectionReceiver.Call(direction);
+            m_ShootInDirectionReceiver.Call(direction);
         }
     }
 }

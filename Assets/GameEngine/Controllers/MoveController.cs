@@ -1,20 +1,26 @@
-using Homeworks._2_GameComponents.Scripts.Components;
+using GameEngine.Components;
+using GameEngine.Services;
+using Modules.GameSystem.Context;
+using Modules.GameSystem.GameElements;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace Homeworks._2_GameComponents.Scripts.Controllers
+namespace GameEngine.Controllers
 {
-    public sealed class MoveController : MonoBehaviour
+    public sealed class MoveController : MonoBehaviour,
+        IGameConstructElement, 
+        IGameStartElement, 
+        IGamePauseElement, 
+        IGameResumeElement, 
+        IGameFinishElement
     {
-        [SerializeField] 
-        private Entity entity;
-
-        private IMoveComponent _moveComponent;
+        private IMoveComponent m_MoveComponent;
         
         [SerializeField] 
-        private InputMap inputMap;
+        private InputMap m_InputMap;
         private void Awake()
         {
-            _moveComponent = entity.Get<IMoveComponent>();
+            enabled = false;
         }
 
         private void Update()
@@ -22,29 +28,29 @@ namespace Homeworks._2_GameComponents.Scripts.Controllers
             if (HasMoveInput(out var direction))
             {
                 direction = direction.normalized * Time.deltaTime;
-                _moveComponent.Move(direction);
+                m_MoveComponent.Move(direction);
             }
             
         }
 
         private bool HasMoveInput(out Vector3 direction)
         {
-            if (Input.GetKey(inputMap.LeftKeyCode))
+            if (Input.GetKey(m_InputMap.LeftKeyCode))
             {
                 direction = Vector3.left;
                 return true;
             }
-            if (Input.GetKey(inputMap.RightKeyCode))
+            if (Input.GetKey(m_InputMap.RightKeyCode))
             {
                 direction = Vector3.right;
                 return true;
             }
-            if (Input.GetKey(inputMap.ForwardKeyCode))
+            if (Input.GetKey(m_InputMap.ForwardKeyCode))
             {
                 direction = Vector3.forward;
                 return true;
             }
-            if (Input.GetKey(inputMap.BackKeyCode))
+            if (Input.GetKey(m_InputMap.BackKeyCode))
             {
                 direction = Vector3.back;
                 return true;
@@ -53,6 +59,31 @@ namespace Homeworks._2_GameComponents.Scripts.Controllers
             return false;
         }
 
-       
+
+        void IGameConstructElement.ConstructGame(IGameContext context)
+        {
+            var entity = context.GetService<HeroService>().GetCharacter();
+            m_MoveComponent = entity.Get<IMoveComponent>();
+        }
+
+        void IGameStartElement.StartGame()
+        {
+            enabled = true;
+        }
+
+        void IGamePauseElement.PauseGame()
+        {
+            enabled = false;
+        }
+
+        void IGameResumeElement.ResumeGame()
+        {
+            enabled = true;
+        }
+
+        void IGameFinishElement.FinishGame()
+        {
+            enabled = false;
+        }
     }
 }

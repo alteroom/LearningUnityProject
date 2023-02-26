@@ -1,16 +1,17 @@
-using Homeworks._1_GameMechanics.Scripts.Primitives.Events;
+using GameEngine.Primitives.Events;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace Homeworks._2_GameComponents.Scripts.Components
+namespace GameEngine.Components
 {
     public sealed class MoveComponent : MonoBehaviour, IMoveComponent
     {
         [SerializeField] 
-        private Vector3EventReceiver moveEventReceiver;
+        private Vector3EventReceiver m_MoveEventReceiver;
         
         public void Move(Vector3 direction)
         {
-            moveEventReceiver.Call(direction);
+            m_MoveEventReceiver.Call(direction);
         }
     }
 }

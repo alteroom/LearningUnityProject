@@ -3,16 +3,13 @@ using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Homeworks._1_GameMechanics.Scripts.Primitives.Timers
+namespace GameEngine.Primitives.Timers
 {
     public sealed class TimerBehaviour : MonoBehaviour
     {
         public event Action OnEnded;
 
-        public bool IsPlaying
-        {
-            get { return this.timerCoroutine != null; }
-        }
+        public bool IsPlaying => this.timerCoroutine != null;
 
         [SerializeField]
         private float duration = 3;

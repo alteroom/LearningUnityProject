@@ -2,16 +2,13 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Homeworks._1_GameMechanics.Scripts.Primitives.Timers
+namespace GameEngine.Primitives.Timers
 {
     public sealed class PeriodBehaviour : MonoBehaviour
     {
         public event Action OnEvent;
         
-        public bool IsPlaying
-        {
-            get { return this.coroutine != null; }
-        }
+        public bool IsPlaying => this.coroutine != null;
 
         private Coroutine coroutine;
 

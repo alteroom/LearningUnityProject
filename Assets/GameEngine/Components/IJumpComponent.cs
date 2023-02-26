@@ -1,4 +1,4 @@
-namespace Homeworks._2_GameComponents.Scripts.Components
+namespace GameEngine.Components
 {
     public interface IJumpComponent
     {

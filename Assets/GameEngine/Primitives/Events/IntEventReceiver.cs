@@ -2,7 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Homeworks._1_GameMechanics.Scripts.Primitives.Events
+namespace GameEngine.Primitives.Events
 {
     public sealed class IntEventReceiver : MonoBehaviour
     {
@@ -11,7 +11,7 @@ namespace Homeworks._1_GameMechanics.Scripts.Primitives.Events
         [Button]
         public void Call(int value)
         {
-            this.OnEvent?.Invoke(value);
+            OnEvent?.Invoke(value);
         }
     }
 }

@@ -1,8 +1,7 @@
-using System;
-using Homeworks._1_GameMechanics.Scripts.Primitives.Containers;
+using GameEngine.Primitives.Containers;
 using UnityEngine;
 
-namespace Homeworks._1_GameMechanics.Scripts.Mechanics
+namespace GameEngine.Mechanics
 {
     public class MovementConstrains : MonoBehaviour
     {
@@ -11,12 +10,6 @@ namespace Homeworks._1_GameMechanics.Scripts.Mechanics
         
         private Vector3 Velocity => this.targetRigidbody.Value.velocity;
         
-        public bool OnTheGround
-        {
-            get
-            {
-                return Mathf.Abs(Velocity.y) <= 0.01f;
-            }
-        }
+        public bool OnTheGround => Mathf.Abs(Velocity.y) <= 0.01f;
     }
 }

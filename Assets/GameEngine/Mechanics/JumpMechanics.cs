@@ -1,9 +1,9 @@
-using Homeworks._1_GameMechanics.Scripts.Primitives.Containers;
-using Homeworks._1_GameMechanics.Scripts.Primitives.Events;
-using Homeworks._1_GameMechanics.Scripts.Primitives.Timers;
+using GameEngine.Primitives.Containers;
+using GameEngine.Primitives.Events;
+using GameEngine.Primitives.Timers;
 using UnityEngine;
 
-namespace Homeworks._1_GameMechanics.Scripts.Mechanics
+namespace GameEngine.Mechanics
 {
     public sealed class JumpMechanics : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Homeworks._2_GameComponents.Scripts.Controllers
+namespace GameEngine.Controllers
 {
     [CreateAssetMenu(fileName = "InputMapSettings", menuName = "ScriptableObjects/InputMap", order = 1)]
     public class InputMap : ScriptableObject

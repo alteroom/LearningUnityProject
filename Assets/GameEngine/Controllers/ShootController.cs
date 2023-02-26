@@ -1,42 +1,73 @@
-using Homeworks._2_GameComponents.Scripts.Components;
+using GameEngine.Components;
+using GameEngine.Services;
+using Modules.GameSystem.Context;
+using Modules.GameSystem.GameElements;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Homeworks._2_GameComponents.Scripts.Controllers
+namespace GameEngine.Controllers
 {
-    public sealed class ShootController : MonoBehaviour
+    public sealed class ShootController : MonoBehaviour,
+    IGameConstructElement, 
+    IGameStartElement, 
+    IGamePauseElement, 
+    IGameResumeElement, 
+    IGameFinishElement
     {
+        
         [SerializeField] 
-        private Entity entity;
-
-        [SerializeField] 
-        private InputMap inputMap;
-        private IShootComponent _shootComponent;
-
+        private InputMap m_InputMap;
+        private IShootComponent m_ShootComponent;
         
         private void Awake()
         {
-            _shootComponent = entity.Get<IShootComponent>();
+            enabled = false;
         }
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(inputMap.ShootMouseButton))
+            if (Input.GetMouseButtonDown(m_InputMap.ShootMouseButton))
             {
                 var direction = GetShootDirection();
-                _shootComponent.Shoot(direction);
+                m_ShootComponent.Shoot(direction);
             }
         }
 
         private Vector3 GetShootDirection()
         {
-            if (Input.GetKey(inputMap.LeftKeyCode))
+            if (Input.GetKey(m_InputMap.LeftKeyCode))
                 return Vector3.left;
-            if (Input.GetKey(inputMap.RightKeyCode))
+            if (Input.GetKey(m_InputMap.RightKeyCode))
                 return Vector3.right;
-            if (Input.GetKey(inputMap.BackKeyCode))
+            if (Input.GetKey(m_InputMap.BackKeyCode))
                 return Vector3.back;
             return Vector3.forward;
+        }
+
+        void IGameConstructElement.ConstructGame(IGameContext context)
+        {
+            var entity = context.GetService<HeroService>().GetCharacter();
+            m_ShootComponent = entity.Get<IShootComponent>();
+        }
+
+        void IGameStartElement.StartGame()
+        {
+            enabled = true;
+        }
+
+        void IGamePauseElement.PauseGame()
+        {
+            enabled = false;
+        }
+
+        void IGameResumeElement.ResumeGame()
+        {
+            enabled = true;
+        }
+
+        void IGameFinishElement.FinishGame()
+        {
+            enabled = false;
         }
     }
 }

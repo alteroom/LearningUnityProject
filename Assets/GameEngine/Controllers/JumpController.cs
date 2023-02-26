@@ -1,29 +1,61 @@
-using System;
-using Homeworks._2_GameComponents.Scripts.Components;
+using GameEngine.Components;
+using GameEngine.Services;
+using Modules.GameSystem.Context;
+using Modules.GameSystem.GameElements;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace Homeworks._2_GameComponents.Scripts.Controllers
+namespace GameEngine.Controllers
 {
-    public sealed class JumpController : MonoBehaviour
+    public sealed class JumpController : MonoBehaviour, 
+        IGameConstructElement, 
+        IGameStartElement, 
+        IGamePauseElement, 
+        IGameResumeElement, 
+        IGameFinishElement
     {
         [SerializeField] 
-        private Entity entity;
-
-        [SerializeField] private InputMap inputMap;
+        private InputMap m_InputMap;
         
-        private IJumpComponent _jumpComponent;
+        private IJumpComponent m_JumpComponent;
         
         private void Awake()
         {
-            _jumpComponent = entity.Get<IJumpComponent>();
+            enabled = false;
         }
 
         private void Update()
         {
-            if (Input.GetKey(inputMap.JumpKeyCode))
+            if (Input.GetKey(m_InputMap.JumpKeyCode))
             {
-                _jumpComponent.Jump();
+                m_JumpComponent.Jump();
             }
+        }
+
+        void IGameConstructElement.ConstructGame(IGameContext context)
+        {
+            var entity = context.GetService<HeroService>().GetCharacter();
+            m_JumpComponent = entity.Get<IJumpComponent>();
+        }
+
+        void IGameStartElement.StartGame()
+        {
+            enabled = true;
+        }
+
+        void IGamePauseElement.PauseGame()
+        {
+            enabled = false;
+        }
+
+        void IGameResumeElement.ResumeGame()
+        {
+            enabled = true;
+        }
+
+        void IGameFinishElement.FinishGame()
+        {
+            enabled = false;
         }
     }
 }
