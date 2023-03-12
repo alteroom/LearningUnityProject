@@ -1358,7 +1358,7 @@ GameObject:
   - component: {fileID: 749777029}
   - component: {fileID: 749777030}
   m_Layer: 0
-  m_Name: DeathController
+  m_Name: AbyssDeathController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3941,7 +3941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LoadOnStart: 1
-  m_GameInstaller: {fileID: 1975710418}
+  m_GameContext: {fileID: 1975710418}
 --- !u!4 &1957386492
 Transform:
   m_ObjectHideFlags: 0
@@ -3986,12 +3986,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05563d240a8f46f5b1532e7e66e3e567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameServices:
+  m_GameServices:
   - {fileID: 660651484}
   - {fileID: 971596047}
   - {fileID: 9819917}
   - {fileID: 449815052}
-  gameElements:
+  m_GameElements:
   - {fileID: 466214666}
   - {fileID: 1702822481}
   - {fileID: 1047614530}

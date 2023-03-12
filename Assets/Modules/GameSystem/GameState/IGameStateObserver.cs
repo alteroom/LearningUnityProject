@@ -2,7 +2,7 @@ using System;
 
 namespace Modules.GameSystem.GameState
 {
-    public interface IGameStateMethods
+    public interface IGameStateObserver
     {
         
         void ConstructGame();

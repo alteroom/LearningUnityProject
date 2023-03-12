@@ -2,6 +2,7 @@ using System.Collections;
 using Modules.GameSystem.Installers;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Modules.GameLoading
 {
@@ -9,9 +10,8 @@ namespace Modules.GameLoading
     {
         [SerializeField]
         private bool m_LoadOnStart;
-
         [SerializeField]
-        private MonoGameContextInstaller m_GameInstaller;
+        private MonoGameContext m_GameContext;
 
         void Start()
         {
@@ -24,32 +24,32 @@ namespace Modules.GameLoading
         private void LoadGame()
         {
             AddListeners();
-            m_GameInstaller.ConstructGame();
+            m_GameContext.ConstructGame();
         
         }
 
         private void AddListeners()
         {
-            m_GameInstaller.OnGameConstructed += OnGameConstructed;
-            m_GameInstaller.OnGameInitialized += OnGameInitialized;
-            m_GameInstaller.OnGameReady += OnGameReady;
-            m_GameInstaller.OnGameStarted += OnGameStarted;
+            m_GameContext.OnGameConstructed += OnGameConstructed;
+            m_GameContext.OnGameInitialized += OnGameInitialized;
+            m_GameContext.OnGameReady += OnGameReady;
+            m_GameContext.OnGameStarted += OnGameStarted;
         }
         private void RemoveListeners()
         {
-            m_GameInstaller.OnGameConstructed -= OnGameConstructed;
-            m_GameInstaller.OnGameInitialized -= OnGameInitialized;
-            m_GameInstaller.OnGameReady -= OnGameReady;
-            m_GameInstaller.OnGameStarted -= OnGameStarted;
+            m_GameContext.OnGameConstructed -= OnGameConstructed;
+            m_GameContext.OnGameInitialized -= OnGameInitialized;
+            m_GameContext.OnGameReady -= OnGameReady;
+            m_GameContext.OnGameStarted -= OnGameStarted;
         }
         private void OnGameConstructed()
         {
-            m_GameInstaller.InitGame();
+            m_GameContext.InitGame();
         }
 
         private void OnGameInitialized()
         {
-            m_GameInstaller.ReadyGame();
+            m_GameContext.ReadyGame();
         }
 
         private void OnGameReady()
@@ -66,7 +66,7 @@ namespace Modules.GameLoading
             Debug.Log("1");
             yield return m_WaitForOneSecond;
             Debug.Log("START");
-            m_GameInstaller.StartGame();
+            m_GameContext.StartGame();
         }
 
         private void OnGameStarted()

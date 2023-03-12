@@ -4,10 +4,11 @@ using Modules.GameSystem.Context;
 using Modules.GameSystem.GameState;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Modules.GameSystem.Installers
 {
-    public class MonoGameContextInstaller : MonoBehaviour, IGameStateEvents
+    public class MonoGameContext : MonoBehaviour, IGameStateObservable
     {
         public event Action OnGameConstructed
         {
@@ -54,18 +55,20 @@ namespace Modules.GameSystem.Installers
         private readonly GameContext m_GameContext = new ();
         private readonly GameContextInstaller m_Installer = new ();
 
+        [FormerlySerializedAs("gameServices")] 
         [SerializeField]
-        private List<MonoBehaviour> gameServices = new();
+        private List<MonoBehaviour> m_GameServices = new();
 
         [Space]
+        [FormerlySerializedAs("gameElements")]
         [SerializeField]
-        private List<MonoBehaviour> gameElements = new();
+        private List<MonoBehaviour> m_GameElements = new();
         
         [Button]
         public void ConstructGame()
         {
-            m_Installer.RegisterServices(gameServices, m_GameContext);
-            m_Installer.RegisterElements(gameElements, m_GameContext);
+            m_Installer.RegisterServices(m_GameServices, m_GameContext);
+            m_Installer.RegisterElements(m_GameElements, m_GameContext);
             m_GameContext.ConstructGame();
         }
 

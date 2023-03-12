@@ -1,132 +1,118 @@
 using System;
 using Modules.GameSystem.GameElements;
 using Modules.GameSystem.GameState;
+using UnityEngine;
 
 namespace Modules.GameSystem.Context
 {
     public class GameContext : IGameContext
     {
-        public event Action OnGameConstructed
-        {
-            add => m_GameState.OnGameConstructed += value;
-            remove => m_GameState.OnGameConstructed -= value;
-        }
+        public event Action OnGameConstructed;
+        public event Action OnGameInitialized;
+        public event Action OnGameReady;
+        public event Action OnGameStarted;
+        public event Action OnGamePaused;
+        public event Action OnGameResumed;
+        public event Action OnGameFinished;
 
-        public event Action OnGameInitialized
-        {
-            add => m_GameState.OnGameInitialized += value;
-            remove => m_GameState.OnGameInitialized -= value;
-        }
-
-        public event Action OnGameReady
-        {
-            add => m_GameState.OnGameReady += value;
-            remove => m_GameState.OnGameReady -= value;
-        }
-
-        public event Action OnGameStarted
-        {
-            add => m_GameState.OnGameStarted += value;
-            remove => m_GameState.OnGameStarted -= value;
-        }
-
-        public event Action OnGamePaused
-        {
-            add => m_GameState.OnGamePaused += value;
-            remove => m_GameState.OnGamePaused -= value;
-        }
-
-        public event Action OnGameResumed
-        {
-            add => m_GameState.OnGameResumed += value;
-            remove => m_GameState.OnGameResumed -= value;
-        }
-
-        public event Action OnGameFinished
-        {
-            add => m_GameState.OnGameFinished += value;
-            remove => m_GameState.OnGameFinished -= value;
-        }   
-        public GameStates State => m_GameState.State;
-
-        private readonly GameState.GameState m_GameState = new ();
+        public GameStates State { get; private set; }
+        
         private readonly ElementsContext m_ElementsContext;
         private readonly ServicesContext m_ServicesContext = new ();
         
         public GameContext()
         {
+            State = GameStates.None;
             m_ElementsContext = new (this);
         }
 
         public void ConstructGame()
         {
-            if (!m_GameState.CanTransit(GameElements.GameElements.Construct))
+            if (State != GameStates.None)
             {
                 return;
             }
+            Debug.Log("ConstructGame");
             m_ElementsContext.ConstructGame();
-            m_GameState.ConstructGame();
+            State = GameStates.Construct;
+            OnGameConstructed?.Invoke();
             
         }
 
         public void InitGame()
         {
-            if (!m_GameState.CanTransit(GameElements.GameElements.Init))
+            if (State != GameStates.Construct)
             {
                 return;
             }
+            Debug.Log("InitGame");
             m_ElementsContext.InitGame();
-            m_GameState.InitGame();
+            State = GameStates.Init;
+            OnGameInitialized?.Invoke();
+            
         }
 
         public void ReadyGame()
         {
-            if (!m_GameState.CanTransit(GameElements.GameElements.Ready))
+            if (State != GameStates.Init)
             {
                 return;
             }
+            Debug.Log("ReadyGame");
             m_ElementsContext.ReadyGame();
-            m_GameState.ReadyGame();
+            State = GameStates.Ready;
+            OnGameReady?.Invoke();
+            
         }
 
         public void StartGame()
         {
-            if (!m_GameState.CanTransit(GameElements.GameElements.Start))
+            if (State != GameStates.Ready)
             {
                 return;
             }
+            Debug.Log("StartGame");
             m_ElementsContext.StartGame();
-            m_GameState.StartGame();
+            State = GameStates.Play;
+            OnGameStarted?.Invoke();
         }
 
         public void PauseGame()
         {
-            if (!m_GameState.CanTransit(GameElements.GameElements.Pause))
+            if (State != GameStates.Play)
             {
                 return;
             }
+            Debug.Log("PauseGame");
             m_ElementsContext.PauseGame();
-            m_GameState.PauseGame();
+            State = GameStates.Pause;
+            OnGamePaused?.Invoke();
+            
         }
 
         public void ResumeGame()
         {
-            if (!m_GameState.CanTransit(GameElements.GameElements.Resume))
+            if (State != GameStates.Pause)
             {
                 return;
             }
+            Debug.Log("ResumeGame");
             m_ElementsContext.ResumeGame();
-            m_GameState.ResumeGame();
+            State = GameStates.Play;
+            OnGameResumed?.Invoke();
+           
         }
 
         public void FinishGame()
         {
-            if (!m_GameState.CanTransit(GameElements.GameElements.Finish))
+            if (State != GameStates.Play && State != GameStates.Pause)
             {
                 return;
             }
+            Debug.Log("FinishGame");
             m_ElementsContext.FinishGame();
-            m_GameState.FinishGame();
+            State = GameStates.Finish;
+            OnGameFinished?.Invoke();
         }
 
         public void RegisterElement(IGameElement element)

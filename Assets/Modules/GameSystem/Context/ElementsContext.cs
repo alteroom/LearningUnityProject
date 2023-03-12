@@ -4,7 +4,7 @@ using Modules.GameSystem.GameState;
 
 namespace Modules.GameSystem.Context
 {
-    internal class ElementsContext : IGameElementsContext, IGameStateMethods
+    internal class ElementsContext : IGameElementsContext, IGameStateObserver
     {
         private readonly IGameContext m_GameContext;
 

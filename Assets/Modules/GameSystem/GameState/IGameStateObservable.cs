@@ -2,7 +2,7 @@ using System;
 
 namespace Modules.GameSystem.GameState
 {
-    public interface IGameStateEvents
+    public interface IGameStateObservable
     {
         event Action OnGameConstructed;
         event Action OnGameInitialized;
