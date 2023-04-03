@@ -1,6 +1,17 @@
 # LearningUnityProject
 Otus Unity Course Homeworks
 
+## Homework 3 FIX
+
+### Branch: 
+- *HW3_GameContext*
+### Scene: 
+- *Assets/Homeworks/Game.unity*
+### Refactored:
+- Removed GameState
+- Removed GameElements
+- Refactored GameContext
+
 ## Homework 3
 
 ### Branch: 
